@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EnterpriseRatingAppraiser.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EnterpriseRatingAppraiserStoreContainer">
+    <EntitySet Name="CompanySet" EntityType="EnterpriseRatingAppraiser.Store.CompanySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyPerfomanceSet" EntityType="EnterpriseRatingAppraiser.Store.CompanyPerfomanceSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CriterionSet" EntityType="EnterpriseRatingAppraiser.Store.CriterionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RatingSet" EntityType="EnterpriseRatingAppraiser.Store.RatingSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="EnterpriseRatingAppraiser.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TypeOfEconomicActivitySet" EntityType="EnterpriseRatingAppraiser.Store.TypeOfEconomicActivitySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OwnershipFormSet" EntityType="EnterpriseRatingAppraiser.Store.OwnershipFormSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TypeOfEconomicActivityCompany" Association="EnterpriseRatingAppraiser.Store.TypeOfEconomicActivityCompany">
+      <End Role="TypeOfEconomicActivity" EntitySet="TypeOfEconomicActivitySet" />
+      <End Role="Company" EntitySet="CompanySet" />
+    </AssociationSet>
+    <AssociationSet Name="OwnershipFormCompany" Association="EnterpriseRatingAppraiser.Store.OwnershipFormCompany">
+      <End Role="OwnershipForm" EntitySet="OwnershipFormSet" />
+      <End Role="Company" EntitySet="CompanySet" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyCompanyPerfomance" Association="EnterpriseRatingAppraiser.Store.CompanyCompanyPerfomance">
+      <End Role="Company" EntitySet="CompanySet" />
+      <End Role="CompanyPerfomance" EntitySet="CompanyPerfomanceSet" />
+    </AssociationSet>
+    <AssociationSet Name="CriterionCompanyPerfomance" Association="EnterpriseRatingAppraiser.Store.CriterionCompanyPerfomance">
+      <End Role="Criterion" EntitySet="CriterionSet" />
+      <End Role="CompanyPerfomance" EntitySet="CompanyPerfomanceSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CompanySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameCompany" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfFoundation" Type="datetime" Nullable="false" />
+    <Property Name="CompanyDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IdTypeOfEconomicActivity" Type="int" Nullable="false" />
+    <Property Name="IdOwnershipForm" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyPerfomanceSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCompany" Type="int" Nullable="false" />
+    <Property Name="IdCriterion" Type="int" Nullable="false" />
+    <Property Name="Month" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CriterionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameCriterion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RatingSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ValueFrom" Type="int" Nullable="false" />
+    <Property Name="ValueTo" Type="int" Nullable="false" />
+    <Property Name="Value" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeOfEconomicActivitySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OwnershipFormSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="TypeOfEconomicActivityCompany">
+    <End Role="TypeOfEconomicActivity" Type="EnterpriseRatingAppraiser.Store.TypeOfEconomicActivitySet" Multiplicity="1" />
+    <End Role="Company" Type="EnterpriseRatingAppraiser.Store.CompanySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfEconomicActivity">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="IdTypeOfEconomicActivity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OwnershipFormCompany">
+    <End Role="OwnershipForm" Type="EnterpriseRatingAppraiser.Store.OwnershipFormSet" Multiplicity="1" />
+    <End Role="Company" Type="EnterpriseRatingAppraiser.Store.CompanySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OwnershipForm">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="IdOwnershipForm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyCompanyPerfomance">
+    <End Role="Company" Type="EnterpriseRatingAppraiser.Store.CompanySet" Multiplicity="1" />
+    <End Role="CompanyPerfomance" Type="EnterpriseRatingAppraiser.Store.CompanyPerfomanceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyPerfomance">
+        <PropertyRef Name="IdCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CriterionCompanyPerfomance">
+    <End Role="Criterion" Type="EnterpriseRatingAppraiser.Store.CriterionSet" Multiplicity="1" />
+    <End Role="CompanyPerfomance" Type="EnterpriseRatingAppraiser.Store.CompanyPerfomanceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Criterion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompanyPerfomance">
+        <PropertyRef Name="IdCriterion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EnterpriseRatingAppraiser" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EnterpriseRatingAppraiserContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanySet" EntityType="EnterpriseRatingAppraiser.Company" />
+          <EntitySet Name="CompanyPerfomanceSet" EntityType="EnterpriseRatingAppraiser.CompanyPerfomance" />
+          <EntitySet Name="CriterionSet" EntityType="EnterpriseRatingAppraiser.Criterion" />
+          <EntitySet Name="RatingSet" EntityType="EnterpriseRatingAppraiser.Rating" />
+          <EntitySet Name="UserSet" EntityType="EnterpriseRatingAppraiser.User" />
+          <EntitySet Name="TypeOfEconomicActivitySet" EntityType="EnterpriseRatingAppraiser.TypeOfEconomicActivity" />
+          <EntitySet Name="OwnershipFormSet" EntityType="EnterpriseRatingAppraiser.OwnershipForm" />
+          <AssociationSet Name="TypeOfEconomicActivityCompany" Association="EnterpriseRatingAppraiser.TypeOfEconomicActivityCompany">
+            <End Role="TypeOfEconomicActivity" EntitySet="TypeOfEconomicActivitySet" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="OwnershipFormCompany" Association="EnterpriseRatingAppraiser.OwnershipFormCompany">
+            <End Role="OwnershipForm" EntitySet="OwnershipFormSet" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyCompanyPerfomance" Association="EnterpriseRatingAppraiser.CompanyCompanyPerfomance">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="CompanyPerfomance" EntitySet="CompanyPerfomanceSet" />
+          </AssociationSet>
+          <AssociationSet Name="CriterionCompanyPerfomance" Association="EnterpriseRatingAppraiser.CriterionCompanyPerfomance">
+            <End Role="Criterion" EntitySet="CriterionSet" />
+            <End Role="CompanyPerfomance" EntitySet="CompanyPerfomanceSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCompany" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateOfFoundation" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompanyDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="TypeOfEconomicActivity" Relationship="EnterpriseRatingAppraiser.TypeOfEconomicActivityCompany" FromRole="Company" ToRole="TypeOfEconomicActivity" />
+          <NavigationProperty Name="OwnershipForm" Relationship="EnterpriseRatingAppraiser.OwnershipFormCompany" FromRole="Company" ToRole="OwnershipForm" />
+          <NavigationProperty Name="CompanyPerfomance" Relationship="EnterpriseRatingAppraiser.CompanyCompanyPerfomance" FromRole="Company" ToRole="CompanyPerfomance" />
+          <Property Name="IdTypeOfEconomicActivity" Type="Int32" Nullable="false" ConcurrencyMode="None" />
+          <Property Name="IdOwnershipForm" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyPerfomance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCompany" Type="Int32" Nullable="false" />
+          <Property Name="IdCriterion" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="EnterpriseRatingAppraiser.CompanyCompanyPerfomance" FromRole="CompanyPerfomance" ToRole="Company" />
+          <NavigationProperty Name="Criterion" Relationship="EnterpriseRatingAppraiser.CriterionCompanyPerfomance" FromRole="CompanyPerfomance" ToRole="Criterion" />
+        </EntityType>
+        <EntityType Name="Criterion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCriterion" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CompanyPerfomance" Relationship="EnterpriseRatingAppraiser.CriterionCompanyPerfomance" FromRole="Criterion" ToRole="CompanyPerfomance" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ValueFrom" Type="Int32" Nullable="false" />
+          <Property Name="ValueTo" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfEconomicActivity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="EnterpriseRatingAppraiser.TypeOfEconomicActivityCompany" FromRole="TypeOfEconomicActivity" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="OwnershipForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="EnterpriseRatingAppraiser.OwnershipFormCompany" FromRole="OwnershipForm" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="TypeOfEconomicActivityCompany">
+          <End Type="EnterpriseRatingAppraiser.TypeOfEconomicActivity" Role="TypeOfEconomicActivity" Multiplicity="1" />
+          <End Type="EnterpriseRatingAppraiser.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfEconomicActivity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="IdTypeOfEconomicActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OwnershipFormCompany">
+          <End Type="EnterpriseRatingAppraiser.OwnershipForm" Role="OwnershipForm" Multiplicity="1" />
+          <End Type="EnterpriseRatingAppraiser.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnershipForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="IdOwnershipForm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyCompanyPerfomance">
+          <End Type="EnterpriseRatingAppraiser.Company" Role="Company" Multiplicity="1" />
+          <End Type="EnterpriseRatingAppraiser.CompanyPerfomance" Role="CompanyPerfomance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyPerfomance">
+              <PropertyRef Name="IdCompany" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CriterionCompanyPerfomance">
+          <End Type="EnterpriseRatingAppraiser.Criterion" Role="Criterion" Multiplicity="1" />
+          <End Type="EnterpriseRatingAppraiser.CompanyPerfomance" Role="CompanyPerfomance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Criterion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyPerfomance">
+              <PropertyRef Name="IdCriterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EnterpriseRatingAppraiserStoreContainer" CdmEntityContainer="EnterpriseRatingAppraiserContainer">
+    <EntitySetMapping Name="CompanySet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.Company)">
+        <MappingFragment StoreEntitySet="CompanySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NameCompany" ColumnName="NameCompany" />
+          <ScalarProperty Name="DateOfFoundation" ColumnName="DateOfFoundation" />
+          <ScalarProperty Name="CompanyDescription" ColumnName="CompanyDescription" />
+          <ScalarProperty Name="IdTypeOfEconomicActivity" ColumnName="IdTypeOfEconomicActivity" />
+          <ScalarProperty Name="IdOwnershipForm" ColumnName="IdOwnershipForm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyPerfomanceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.CompanyPerfomance)">
+        <MappingFragment StoreEntitySet="CompanyPerfomanceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCompany" ColumnName="IdCompany" />
+          <ScalarProperty Name="IdCriterion" ColumnName="IdCriterion" />
+          <ScalarProperty Name="Month" ColumnName="Month" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CriterionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.Criterion)">
+        <MappingFragment StoreEntitySet="CriterionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NameCriterion" ColumnName="NameCriterion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RatingSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.Rating)">
+        <MappingFragment StoreEntitySet="RatingSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ValueFrom" ColumnName="ValueFrom" />
+          <ScalarProperty Name="ValueTo" ColumnName="ValueTo" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfEconomicActivitySet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.TypeOfEconomicActivity)">
+        <MappingFragment StoreEntitySet="TypeOfEconomicActivitySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OwnershipFormSet">
+      <EntityTypeMapping TypeName="IsTypeOf(EnterpriseRatingAppraiser.OwnershipForm)">
+        <MappingFragment StoreEntitySet="OwnershipFormSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

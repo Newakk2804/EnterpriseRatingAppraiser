@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d9d3664c23d405099df3d55073f7bef" Name="Diagram1" ZoomLevel="47" >
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.Company" Width="2.5" PointX="9.875" PointY="7.125" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.CompanyPerfomance" Width="2.25" PointX="13.125" PointY="5.625" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.Criterion" Width="1.5" PointX="10.875" PointY="5.125" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.Rating" Width="1.5" PointX="7.125" PointY="3.75" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.TypeOfEconomicActivity" Width="2.125" PointX="7" PointY="6.25" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.OwnershipForm" Width="1.5" PointX="7.625" PointY="8.75" />
+        <EntityTypeShape EntityType="EnterpriseRatingAppraiser.User" Width="1.5" PointX="9" PointY="2.625" />
+        <AssociationConnector Association="EnterpriseRatingAppraiser.TypeOfEconomicActivityCompany" />
+        <AssociationConnector Association="EnterpriseRatingAppraiser.OwnershipFormCompany" />
+        <AssociationConnector Association="EnterpriseRatingAppraiser.CompanyCompanyPerfomance" />
+        <AssociationConnector Association="EnterpriseRatingAppraiser.CriterionCompanyPerfomance" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
